@@ -2,7 +2,7 @@
 #maSQL
 #main menu 
 #
-source ./databasedbCRUD.sh
+source ./database/dbCRUD.sh
 userInput=""
 if [ ! -d ~/maSQL ]; then
 	mkdir ~/maSQL
@@ -21,6 +21,8 @@ while true; do
             ;;
         2)
             read dbName
+            clear
+            echo "aaaaaaaaa"
             useDatabase dbName
             ;;
         3)
