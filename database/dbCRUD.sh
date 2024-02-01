@@ -11,14 +11,17 @@ printMainMenu() {
 createDatabase() {
 	mkdir ~/maSQL/$1.db
 }
+
 listDatabase() {
 	echo "LIST SELECTED"
 	ls ~/maSQL | awk -F '.' '{print NR".", $1}'
 }
+
 useDatabase() {
 	echo "USE SELECTED"
 	cd ~/maSQL/$1.db
 }
+
 dropDatabase() {
 	
 	local confirmation

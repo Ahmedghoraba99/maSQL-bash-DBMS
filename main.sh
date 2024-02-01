@@ -2,7 +2,7 @@
 #maSQL
 #main menu 
 #
-source ./databasedbCRUD.sh
+source ./database/dbCRUD.sh
 userInput=""
 if [ ! -d ~/maSQL ]; then
 	mkdir ~/maSQL
