@@ -18,7 +18,7 @@ listDatabase() {
 useDatabase() {
 	if [ -d "$HOME/maSQL/$1.db" ]; then
 		clear
-		# TODO: Write submenu function which shows operations
+		# TODO: Write submenu function which shows operations and send it as a parameter to the function containg the whil loop 
 		echo "USING DB $1"
 		cd "$HOME/maSQL/$1.db" || return 1
 	else
