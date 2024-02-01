@@ -1,8 +1,10 @@
 #!/bin/bash
 #maSQL
 #main menu 
-#
-source ./databasedbCRUD.sh
+
+source ./database/dbCRUD.sh
+source ./function/validate_name
+
 userInput=""
 if [ ! -d ~/maSQL ]; then
 	mkdir ~/maSQL
