@@ -2,7 +2,7 @@
 #maSQL
 #main menu 
 #
-source ./database/dbCRUD.sh
+source ./databasedbCRUD.sh
 userInput=""
 if [ ! -d ~/maSQL ]; then
 	mkdir ~/maSQL
@@ -16,19 +16,29 @@ while true; do
     read userInput
     case $userInput in
         1)
-            read dbName
-            createDatabase "$dbName" 
+            read -p "Enter database name: " dbName
+            validate_name "$dbName"
+            if [ $? -eq 1 ]; then 
+                echo "Error: Invalid database name."
+            else
+                createDatabase $dbName
+            fi 
             ;;
         2)
             read dbName
-            useDatabase dbName
+            clear
+            useDatabase $dbName
             ;;
         3)
-            listDatabase dbName
+            listDatabase 
             ;;
         4)
-            read dbName
-            dropDatabase "$dbName"
+            validate_name "$dbName"
+            if [ $? -eq 1 ]; then 
+                echo "Error: Invalid database name."
+            else
+                dropDatabase $dbName
+            fi 
             ;;
         5)
             echo "Byeeee..."

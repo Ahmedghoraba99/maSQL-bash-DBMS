@@ -18,8 +18,14 @@ listDatabase() {
 }
 
 useDatabase() {
-	echo "USE SELECTED"
-	cd ~/maSQL/$1.db
+	if [ -d "$HOME/maSQL/$1.db" ]; then
+		clear
+		# TODO: Write submenu function which shows operations
+		echo "USING DB $1"
+		cd "$HOME/maSQL/$1.db" || return 1
+	else
+		echo "Error: Database $1 not found."
+	fi
 }
 
 dropDatabase() {
