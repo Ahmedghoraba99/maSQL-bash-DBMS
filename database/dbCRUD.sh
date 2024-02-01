@@ -11,10 +11,12 @@ printMainMenu() {
 createDatabase() {
 	mkdir ~/maSQL/$1.db
 }
+
 listDatabase() {
 	echo "LIST SELECTED"
 	ls ~/maSQL | awk -F '.' '{print NR".", $1}'
 }
+
 useDatabase() {
 	if [ -d "$HOME/maSQL/$1.db" ]; then
 		clear
@@ -25,6 +27,7 @@ useDatabase() {
 		echo "Error: Database $1 not found."
 	fi
 }
+
 dropDatabase() {
 	
 	local confirmation
