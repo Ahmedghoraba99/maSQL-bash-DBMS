@@ -3,7 +3,8 @@
 #main menu 
 
 source ./database/dbCRUD.sh
-source ./function/validate_name
+source ./database/tableCRUD.sh
+source ./functions/validation.sh
 
 userInput=""
 if [ ! -d ~/maSQL ]; then
@@ -35,6 +36,7 @@ while true; do
             listDatabase 
             ;;
         4)
+            read dbName
             validate_name "$dbName"
             if [ $? -eq 1 ]; then 
                 echo "Error: Invalid database name."

@@ -1,4 +1,5 @@
 #!/bin/bash
+source ./database/tableCRUD.sh
 printMainMenu() {
 	echo "Choose an option from below:"
 	echo "1) CREATE NEW DATABASE"
@@ -10,11 +11,12 @@ printMainMenu() {
 
 createDatabase() {
 	mkdir ~/maSQL/$1.db
+	mkdir ~/maSQL/$1.db/meta
 }
 
 listDatabase() {
 	echo "LIST SELECTED"
-	ls ~/maSQL | awk -F '.' '{print NR".", $1}'
+	ls ~/maSQL/$currentDB | awk -F '.' '{print NR".", $1}'
 }
 
 useDatabase() {
@@ -22,7 +24,8 @@ useDatabase() {
 		clear
 		# TODO: Write submenu function which shows operations and send it as a parameter to the function containg the whil loop 
 		echo "USING DB $1"
-		cd "$HOME/maSQL/$1.db" || return 1
+		cd "$HOME/maSQL/$1.db" 
+		subMenu $1 #Calls the submenu from table crudtable file, giving it the db to work with
 	else
 		echo "Error: Database $1 not found."
 	fi

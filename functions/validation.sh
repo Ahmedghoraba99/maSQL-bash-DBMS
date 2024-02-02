@@ -1,5 +1,5 @@
 #!/bin/bash
-# Validation function
+# Validation function (used in coloumns/table names / DB names)
 validate_name() {
     local name="$1"
     local nameIsValid=1
@@ -36,4 +36,21 @@ validate_name() {
     else
         return 1
     fi
+}
+#this functoin that validates the types of daa for columns
+#it takes two parameters, first is the coloumn number
+validateColumnType() {
+    while true; do
+        read -p "Enter column type for column $i (int/char): " currentColumnType
+        case $currentColumnType in
+            int|char)
+                columnsTypes[$i]="$currentColumnType"
+                break
+                ;;
+            *)
+                echo "Invalid column type. Please enter 'int' or 'char'."
+                ;;
+        esac
+    done
+    echo "$currentColumnType"
 }
