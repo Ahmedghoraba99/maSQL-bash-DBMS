@@ -1,5 +1,7 @@
 #!/bin/bash
 #BROKEN 
+# source "../functions/insert.sh"
+# source "../functions/update.sh"
 
 printRecordsMenu() {
 	echo "Choose an operation to perform on table $1"
