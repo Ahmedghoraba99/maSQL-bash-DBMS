@@ -41,10 +41,14 @@ createTable() {
         fi
         validateColumnType $i 
     done
-
-    # Call something here with the table information
+    primaryKey=""
+    read -p "Enter Primary key coloumn Number: " primaryKey
+    if ! [[ $primaryKey =~ ^[0-9]+$ ]] || [ $primaryKey -le 0 ] || [ $primaryKey -ge $((columnsNumber+1)) ]; then
+    echo "Error: Not a an integer or out of range."
+    return 1
+    fi
     touch "$meta_file" "$table_file"
-    writeTableMetaData 
+    writeTableMetaData $primaryKey
     echo "Table '$table_name' created successfully with $columnsNumber columns."
 }
 
