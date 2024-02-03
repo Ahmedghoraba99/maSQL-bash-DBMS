@@ -12,7 +12,7 @@ printRecordsMenu() {
 
 tableMenu() {
     while true; do
-    printMainMenu
+    printRecordsMenu
     read userInput
     case $userInput in
         1)
