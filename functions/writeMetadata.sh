@@ -9,12 +9,12 @@ writeTableMetaData() {
     echo $columnsNumber >> $meta_file
     echo $primaryKey >> $meta_file     #the number of the field of PK
     for column in "${columns[@]}"
-        do
-            echo -n "$column:" >> $meta_file
+    do
+        echo -n "$column:" >> $meta_file
     done
     echo  >> $meta_file
     for columnsType in "${columnsTypes[@]}"
-        do
-            echo -n "$columnsType:" >> $meta_file
+    do
+        echo -n "$columnsType:" >> $meta_file
     done
 }
