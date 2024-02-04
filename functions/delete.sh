@@ -7,14 +7,15 @@ delete(){
     local metaFile="$HOME/maSQL/$DBName.db/meta/$tableName.meta"
     read -p "Enter the number of primary key to delete: " primaryKeyValue
     local PKColoumn=$(head -2 $metaFile | tail -1)
-    # echo "pk in col $PKColoumn"
-    local searchRes=$(awk -F':' -v column_number="$PKColoumn" -v search_value="$primaryKeyValue" '$column_number == search_value {print $column_number}' "$tableFile")
-    echo $searchRes
-    if isUniqueValue $primaryKeyValue ; then
-        sed -i "/^${primaryKeyValue}:/d" "$tableFile"
-        
+    # Find the row number of the primary key value
+    local searchRes=$(awk -F':' '$'"$PKColoumn"' == "'"$primaryKeyValue"'" {print NR}' aaa.table)
+    echo " $searchRes is the row you want to delete"
+    if [ -z "$searchRes" ]; then
+        echo "No such record found."
     else
-        echo "the number is not found"
+        # Delete the row
+        sed -i "${searchRes}d" "$tableFile"
+        echo "Record deleted successfully."
     fi
     
 }

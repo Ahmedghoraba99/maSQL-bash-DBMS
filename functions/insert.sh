@@ -50,6 +50,7 @@ insertData() {
         fi
     done
     # echo $data
+     echo >> "$tableFile"   
     insertInFile $data
     
 }
