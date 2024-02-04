@@ -8,7 +8,7 @@ delete(){
     read -p "Enter the number of primary key to delete: " primaryKeyValue
     local PKColoumn=$(head -2 $metaFile | tail -1)
     # Find the row number of the primary key value
-    local searchRes=$(awk -F':' '$'"$PKColoumn"' == "'"$primaryKeyValue"'" {print NR}' aaa.table)
+    local searchRes=$(awk -F':' '$'"$PKColoumn"' == "'"$primaryKeyValue"'" {print NR}' $tableFile)
     echo " $searchRes is the row you want to delete"
     if [ -z "$searchRes" ]; then
         echo "No such record found."
