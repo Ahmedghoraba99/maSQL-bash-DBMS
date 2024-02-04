@@ -6,17 +6,30 @@ readData() {
     local DBName="$2"
     local tableFile="$HOME/maSQL/$DBName.db/$tableName.table"
     
-    awk -F':' '
-        BEGIN { printf "\n" }
-        {
-            printf "%-5s", $1
-            for (i=2; i<=NF; i++) {
-                printf "%-15s", $i
+    # Calculate the length of the longest field
+    max_length=$(awk '{
+        for (i = 1; i <= NF; i++) {
+            if (length($i) > max_length) {
+                max_length = length($i);
             }
-            printf "\n"
         }
-        END { printf "\n" }
+    }
+    END {
+        print max_length;
+    }' "$tableFile")
+    
+    echo "Length of the longest field in $tableName table: $max_length"
+    
+    # Print table data in a table-like format
+    awk -F':' -v max_length="$max_length" '
+    BEGIN { printf "\n" }
+    {
+        for (i=1; i<=NF; i++) {
+            printf "%-" max_length "s |", $i
+        }
+        printf "\n"
+    }
+    END { printf "\n" }
     ' "$tableFile"
 }
-
 

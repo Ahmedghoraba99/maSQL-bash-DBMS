@@ -1,6 +1,8 @@
 #!/bin/bash
 source ./functions/insert.sh
 source ./functions/readData.sh
+source ./functions/delete.sh
+
 printRecordsMenu() {
     
     echo "Choose an operation to perform on table $1"
@@ -34,13 +36,7 @@ tableMenu() {
                 echo "222222222"
             ;;
             4)
-                read dbName
-                validate_name "$dbName"
-                if [ $? -eq 1 ]; then
-                    echo "Error: Invalid database name."
-                else
-                    dropDatabase $dbName
-                fi
+                delete $tableName $DBName
             ;;
             5)
                 echo "Byeeee..."
