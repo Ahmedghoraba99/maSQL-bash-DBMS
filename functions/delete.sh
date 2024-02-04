@@ -1,5 +1,4 @@
 #!/bin/bash
-source "./insert.sh"
 delete(){
     local tableName="$1"
     local DBName="$2"
@@ -14,7 +13,7 @@ delete(){
         echo "No such record found."
     else
         # Delete the row
-        sed -i "${searchRes}d" "$tableFile"
+        sed -i -e "${searchRes}d" -e '/^$/d' "$tableFile"
         echo "Record deleted successfully."
     fi
     

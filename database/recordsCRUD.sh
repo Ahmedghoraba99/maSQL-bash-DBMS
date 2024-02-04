@@ -4,7 +4,6 @@ source ./functions/readData.sh
 source ./functions/delete.sh
 
 printRecordsMenu() {
-    
     echo "Choose an operation to perform on table $1"
     echo "1) CREATE NEW RECORD"
     echo "2) UPDATE EXISTING RECORD"
@@ -21,19 +20,13 @@ tableMenu() {
         read -p "maSQL> " userInput
         case $userInput in
             1)
-                
                 insertData $tableName $DBName
             ;;
             2)
-                read dbName
-                clear
-                useDatabase $dbName
+                echo "Not implemented yet."
             ;;
             3)
-                
-                echo "11111111111"
                 readData $tableName $DBName
-                echo "222222222"
             ;;
             4)
                 delete $tableName $DBName
