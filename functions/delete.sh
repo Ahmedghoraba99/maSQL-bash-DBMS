@@ -1,7 +1,5 @@
 #!/bin/bash
-
 source "./insert.sh"
-
 delete(){
     local tableName="$1"
     local DBName="$2"
