@@ -1,6 +1,7 @@
 #!/bin/bash
 source ./functions/validation.sh
 source ./functions/writeMetadata.sh
+source ./database/recordsCRUD.sh
 currentDB=""
 printSubMenu() {
     
@@ -14,8 +15,8 @@ printSubMenu() {
 }
 createTable() {
     local table_name=$1
-    local meta_file="./meta/$table_name.meta"
-    local table_file="./$table_name.table"
+    meta_file="./meta/$table_name.meta"
+    table_file="./$table_name.table"
     
     if [ -e "$meta_file" ] || [ -e "$table_file" ]; then
         echo "Table '$table_name' already exists."
@@ -64,14 +65,7 @@ listTables() {
 }
 
 useTable() {
-    if [ -d "$HOME/maSQL/$1.db/$2" ]; then
-        clear
-        # TODO: Write submenu function which shows operations
-        echo "USING DB $1"
-        cd "$HOME/maSQL/$1.db" || return 1
-    else
-        echo "Error: Database $1 not found."
-    fi
+    tableMenu $1 $2
 }
 dropTable() {
     local confirmation
@@ -107,6 +101,7 @@ subMenu(){
             2)
                 read dbName
                 clear
+                echo "$dbName"
                 useDatabase $dbName
             ;;
             3)
@@ -114,12 +109,7 @@ subMenu(){
             ;;
             4)
                 read -p "Enter Table name: " tableName
-                validate_name "$tableName"
-                if [ $? -eq 1 ]; then
-                    echo "Error: Invalid Table name."
-                else
-                    dropTable $tableName
-                fi
+                useTable $tableName $currentDB
             ;;
             5)
                 read -p "Enter Table name: " tableName

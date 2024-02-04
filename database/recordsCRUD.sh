@@ -1,8 +1,8 @@
 #!/bin/bash
-#BROKEN
-
+source ./functions/insert.sh
+source ./functions/readData.sh
+source ./functions/delete.sh
 printRecordsMenu() {
-    clear
     echo "Choose an operation to perform on table $1"
     echo "1) CREATE NEW RECORD"
     echo "2) UPDATE EXISTING RECORD"
@@ -12,35 +12,23 @@ printRecordsMenu() {
 }
 
 tableMenu() {
+    tableName=$1
+    DBName=$2
     while true; do
-        printMainMenu
+        printRecordsMenu
         read -p "maSQL> " userInput
         case $userInput in
             1)
-                read -p "Enter database name: " dbName
-                validate_name "$dbName"
-                if [ $? -eq 1 ]; then
-                    echo "Error: Invalid database name."
-                else
-                    createDatabase $dbName
-                fi
+                insertData $tableName $DBName
             ;;
             2)
-                read dbName
-                clear
-                useDatabase $dbName
+                echo "Not implemented yet."
             ;;
             3)
-                listDatabase
+                readData $tableName $DBName
             ;;
             4)
-                read dbName
-                validate_name "$dbName"
-                if [ $? -eq 1 ]; then
-                    echo "Error: Invalid database name."
-                else
-                    dropDatabase $dbName
-                fi
+                delete $tableName $DBName
             ;;
             5)
                 echo "Byeeee..."

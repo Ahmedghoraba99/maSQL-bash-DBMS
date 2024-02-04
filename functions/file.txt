@@ -1,0 +1,4 @@
+line1
+1
+col1:col2:col3
+int:char:char
