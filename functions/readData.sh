@@ -1,8 +1,11 @@
 #!/bin/bash
 
-displayData() {
-    local file="$1"
-
+readData() {
+    echo "started"
+    local tableName="$1"
+    local DBName="$2"
+    local tableFile="$HOME/maSQL/$DBName.db/$tableName.table"
+    
     awk -F':' '
         BEGIN { printf "\n" }
         {
@@ -13,8 +16,7 @@ displayData() {
             printf "\n"
         }
         END { printf "\n" }
-    ' "$file"
+    ' "$tableFile"
 }
 
 
-displayData "./file2.txt"
