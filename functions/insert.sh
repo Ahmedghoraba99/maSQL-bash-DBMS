@@ -28,7 +28,7 @@ insertData() {
                 data="${data}$primaryKeyValue:"
             fi
         else 
-            read -p "Enter the Value to insert in '${columns[i]}' '${types[i]}' : " value
+            read -p "Enter the Value to insert in '${columns[i]}' '${types[i]}' : "value
             if [[ ${types[i]} == "char" ]]; then # if type char
                 if checkTypeChar $value ; then
                     data="${data}$value:"
@@ -50,13 +50,12 @@ insertData() {
         fi
     done
     # echo $data
-     echo >> "$tableFile"   
     insertInFile $data
-    
+    echo >> "$tableFile"   
 }
 
 checkTypeChar(){
-    if [[ "$1" =~ ^[a-zA-Z0-9]+$ ]]; then
+    if [[ "$1" =~ ^[a-zA-Z0-9@_]+$ ]]; then
         return 0
     else
         return 1
@@ -99,6 +98,7 @@ getPKIndex(){
 
 isUniqueValue(){
     local PkArray=$(getAllDataPK "$tableFile")
+    echo $PkArray
     local value="$1"
 
     for element in $PkArray; do

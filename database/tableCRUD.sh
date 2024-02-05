@@ -37,7 +37,7 @@ createTable() {
         
         # Validate column name
         if ! validate_name "$currentColumn"; then
-            rm "$meta_file" "$table_file"
+            # rm "$meta_file" "$table_file"
             echo "Please follow the name convention for columns. Exiting..."
             return 1
         fi

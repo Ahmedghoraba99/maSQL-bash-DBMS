@@ -2,6 +2,8 @@
 source ./functions/insert.sh
 source ./functions/readData.sh
 source ./functions/delete.sh
+source ./functions/update.sh
+
 printRecordsMenu() {
     echo "Choose an operation to perform on table $1"
     echo "1) CREATE NEW RECORD"
@@ -22,7 +24,7 @@ tableMenu() {
                 insertData $tableName $DBName
             ;;
             2)
-                echo "Not implemented yet."
+                update $tableName $DBName
             ;;
             3)
                 readData $tableName $DBName
