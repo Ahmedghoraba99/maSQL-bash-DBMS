@@ -23,8 +23,8 @@ createTable() {
         return 1
     fi
     read -p "Please enter the number of columns: " columnsNumber
-    if ! [[ $columnsNumber =~ ^[0-9]+$ ]]; then
-        echo "Error: Not a number."
+    if ! [[ $columnsNumber =~ ^[1-9]+$ ]]; then
+        echo "Error: Not a number and not or zero."
         return 1
     fi
     
@@ -34,6 +34,15 @@ createTable() {
     for ((i = 1; i <= columnsNumber; i++)); do
         read -p "Enter column name for column $i: " currentColumn
         columns+=("$currentColumn")
+        
+        
+        #secondary for loop to check if the column name is unique in columns array
+        for ((j = 0; j < i-1; j++)); do
+            if [ "${columns[$j]}" == "$currentColumn" ]; then
+                echo "Error: Column name '$currentColumn' already exists."
+                return 1
+            fi
+        done
         
         # Validate column name
         if ! validate_name "$currentColumn"; then
