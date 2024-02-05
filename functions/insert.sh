@@ -5,6 +5,7 @@ insertData() {
     DBName=$2
     metaFile="$HOME/maSQL/$DBName.db/meta/$tableName.meta"
     tableFile="$HOME/maSQL/$DBName.db/$tableName.table"
+    
     # Read line number 3 and save it to the "columns" array
     columns_line=$(sed -n '3p' "$metaFile")
     IFS=":" read -ra columns <<< "$columns_line"
@@ -14,8 +15,9 @@ insertData() {
     IFS=":" read -ra types <<< "$types_line"
 
     #read Data in primary Key
-    primaryKeyIndex=$(getPKIndex)
-    primaryKeyIndex=$((primaryKeyIndex - 1))
+    numberOfColumns=$(head -n 1 "$metaFile")
+    primaryKeyColumns=$(getPKIndex)
+    primaryKeyIndex=$((primaryKeyColumns - 1))
     data=""
 
     for ((i=0; i<${#columns[@]}; i++)); do
@@ -28,7 +30,7 @@ insertData() {
                 data="${data}$primaryKeyValue:"
             fi
         else 
-            read -p "Enter the Value to insert in '${columns[i]}' '${types[i]}' : "value
+            read -p "Enter the Value to insert in '${columns[i]}' '${types[i]}' : " value
             if [[ ${types[i]} == "char" ]]; then # if type char
                 if checkTypeChar $value ; then
                     data="${data}$value:"
@@ -77,18 +79,12 @@ insertInFile() {
 
 getAllDataPK() {
     local file="$1"
-    local pk_array=()
-
     # Read the file and extract primary keys
-    while IFS=":" read -r pk rest; do
-        # Check if the line contains a primary key
-        if [[ -n $pk ]]; then
-            pk_array+=("$pk")
-        fi
-    done < "$file"
-
+    data=$(cat "$file")
+    AllValueOfPK=()
+    AllValueOfPK=( $(echo "$data" |  awk -F ':' "{for(i=${primaryKeyColumns};i<=NF;i+=${numberOfColumns}) print \$i}") )
     # Return the array
-    echo "${pk_array[@]}"
+    echo "${AllValueOfPK[@]}"
 }
 
 getPKIndex(){
@@ -98,7 +94,6 @@ getPKIndex(){
 
 isUniqueValue(){
     local PkArray=$(getAllDataPK "$tableFile")
-    echo $PkArray
     local value="$1"
 
     for element in $PkArray; do
