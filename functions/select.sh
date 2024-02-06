@@ -14,7 +14,12 @@ selectData(){
 displayData(){
     searchData=$1
     tableFile=$2
-    grep "\<$searchData\>" "$tableFile" | awk -F':' '$'"$primaryKeyColumns"' == "'"$searchData"'" {print $0}' 
+    result=$(grep "\<$searchData\>" "$tableFile" | awk -F':' '$'"$primaryKeyColumns"' == "'"$searchData"'" {print $0}')
+    if [ -z "$result" ]; then
+        echo -e "\e[91mThe Primary Key Value is not found....\e[0m"
+    else
+        echo "$result"
+    fi
 
 }
 
