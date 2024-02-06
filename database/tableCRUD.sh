@@ -7,11 +7,10 @@ printSubMenu() {
     
     echo "Choose an option from below:"
     echo "1) CREATE NEW Table"
-    echo "2) UPDATE Table"
-    echo "3) LIST AVAILABLE tables"
-    echo "4) USE table"
-    echo "5) DROP table"
-    echo "6) Exit"
+    echo "2) LIST AVAILABLE tables"
+    echo "3) USE table"
+    echo "4) DROP table"
+    echo "5) Exit"
 }
 
 createTable() {
@@ -109,19 +108,13 @@ subMenu(){
                 fi
             ;;
             2)
-                read dbName
-                clear
-                echo "$dbName"
-                useDatabase $dbName
-            ;;
-            3)
                 listTables
             ;;
-            4)
+            3)
                 read -p "Enter Table name: " tableName
                 useTable $tableName $currentDB
             ;;
-            5)
+            4)
                 read -p "Enter Table name: " tableName
                 validate_name "$tableName"
                 if [ $? -eq 1 ]; then
@@ -130,7 +123,7 @@ subMenu(){
                     useTable $tableName
                 fi
             ;;
-            6)
+            5)
                 clear
                 echo "Returning to main menu..."
                 break 1
