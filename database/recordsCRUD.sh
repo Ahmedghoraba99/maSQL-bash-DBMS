@@ -16,6 +16,9 @@ printRecordsMenu() {
 tableMenu() {
     tableName=$1
     DBName=$2
+    table="$HOME/maSQL/$DBName.db/$tableName.table"
+    count=$(wc -l "$table" | awk '{print $1}')
+
     while true; do
         printRecordsMenu
         read -p "maSQL> " userInput
@@ -24,13 +27,22 @@ tableMenu() {
                 insertData $tableName $DBName
             ;;
             2)
-                update $tableName $DBName
+                if [ $count -ne 0 ]; then
+                    update $tableName $DBName
+                else
+                    echo "The file is empty."
+                fi
+                
             ;;
             3)
                 readData $tableName $DBName
             ;;
             4)
-                delete $tableName $DBName
+                if [ $count -ne 0 ]; then
+                    delete $tableName $DBName
+                else
+                    echo "The file is empty."
+                fi
             ;;
             5)
                 echo "Byeeee..."
@@ -43,3 +55,7 @@ tableMenu() {
     done
     
 }
+
+
+
+
