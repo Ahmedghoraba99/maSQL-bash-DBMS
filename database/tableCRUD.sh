@@ -13,6 +13,7 @@ printSubMenu() {
     echo "5) DROP table"
     echo "6) Exit"
 }
+
 createTable() {
     local table_name=$1
     meta_file="./meta/$table_name.meta"

@@ -3,6 +3,7 @@ source ./functions/insert.sh
 source ./functions/readData.sh
 source ./functions/delete.sh
 source ./functions/update.sh
+source ./functions/select.sh
 
 printRecordsMenu() {
     echo "Choose an operation to perform on table $1"
@@ -10,7 +11,8 @@ printRecordsMenu() {
     echo "2) UPDATE EXISTING RECORD"
     echo "3) LIST ALL RECORDS"
     echo "4) DROP RECORD"
-    echo "5) Exit"
+    echo "5) Select RECORD"
+    echo "6) Exit"
 }
 
 tableMenu() {
@@ -45,6 +47,9 @@ tableMenu() {
                 fi
             ;;
             5)
+                selectData $tableName $DBName
+            ;;
+            6)
                 echo "Byeeee..."
                 break
             ;;
