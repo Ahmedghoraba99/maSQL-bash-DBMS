@@ -16,7 +16,8 @@ createDatabase() {
 
 listDatabase() {
     echo "LIST SELECTED"
-    ls ~/maSQL/$currentDB | awk -F '.' '{print NR".", $1}'
+    cd $HOME/maSQL
+    ls ~/maSQL/ | awk -F '.' '{print NR".", $1}'
 }
 
 useDatabase() {
