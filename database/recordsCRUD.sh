@@ -4,6 +4,7 @@ source ./functions/readData.sh
 source ./functions/delete.sh
 source ./functions/update.sh
 source ./functions/select.sh
+source ./functions/selectByColumns.sh
 
 printRecordsMenu() {
     echo "Choose an operation to perform on table $1"
@@ -11,8 +12,9 @@ printRecordsMenu() {
     echo "2) UPDATE EXISTING RECORD"
     echo "3) LIST ALL RECORDS"
     echo "4) DROP RECORD"
-    echo "5) Select RECORD"
-    echo "6) Exit"
+    echo "5) Select RECORD by PK"
+    echo "6) Select RECORD by columns"
+    echo "7) Exit"
 }
 
 tableMenu() {
@@ -50,6 +52,13 @@ tableMenu() {
                 selectData $tableName $DBName
             ;;
             6)
+                if [ $count -ne 0 ]; then
+                    selectByColumns $tableName $DBName
+                else
+                    echo "The file is empty."
+                fi
+            ;;
+            7)
                 echo "Byeeee..."
                 break
             ;;
