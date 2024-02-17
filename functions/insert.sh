@@ -26,8 +26,26 @@ insertData() {
             if isUniqueValue $primaryKeyValue; then
                 echo "This Value is aready found in table."
                 return
-            else 
-                data="${data}$primaryKeyValue:"
+            else
+                if [[ ${types[i]} == "char" ]]; then # if type char
+                    if checkTypeChar $value ; then
+                        data="${data}$primaryKeyValue:"
+                    else
+                        echo "this not data type of char ."
+                        return
+                    fi
+                elif [[ ${types[i]} == "int" ]]; then # if type int
+                    if checkTypeInt $value ; then 
+                        data="${data}$primaryKeyValue:"
+                    else
+                        echo "this not data type of int ."
+                        return 
+                    fi
+                else
+                    echo "Unknown type for item '${columns[i]}'"
+                    return
+                fi
+                
             fi
         else 
             read -p "Enter the Value to insert in '${columns[i]}' '${types[i]}' : " value

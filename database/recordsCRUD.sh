@@ -31,32 +31,24 @@ tableMenu() {
                 insertData $tableName $DBName
             ;;
             2)
-                if [ $count -ne 0 ]; then
-                    update $tableName $DBName
-                else
-                    echo "The file is empty."
-                fi
-                
+                update $tableName $DBName
             ;;
             3)
                 readData $tableName $DBName
             ;;
             4)
-                if [ $count -ne 0 ]; then
-                    delete $tableName $DBName
-                else
-                    echo "The file is empty."
-                fi
+                delete $tableName $DBName
+
             ;;
             5)
                 selectData $tableName $DBName
             ;;
             6)
-                if [ $count -ne 0 ]; then
-                    selectByColumns $tableName $DBName
-                else
-                    echo "The file is empty."
-                fi
+                #if [ $count -ne 0 ]; then
+                selectByColumns $tableName $DBName
+                #else
+                #    echo "The file is empty."
+                #fi
             ;;
             7)
                 echo "Byeeee..."
