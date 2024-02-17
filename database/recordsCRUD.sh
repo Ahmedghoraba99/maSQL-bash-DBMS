@@ -21,9 +21,9 @@ tableMenu() {
     tableName=$1
     DBName=$2
     table="$HOME/maSQL/$DBName.db/$tableName.table"
-    count=$(wc -l "$table" | awk '{print $1}')
 
     while true; do
+        count=$(wc -l "$table" | awk '{print $1}')
         printRecordsMenu
         read -p "maSQL> " userInput
         case $userInput in
